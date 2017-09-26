@@ -1,0 +1,9 @@
+html
+    head
+        title= title
+    body
+        block content
+            each project in projects
+                a(href='project/' + project.uuid) 
+                    h1= project.name
+            
