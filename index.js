@@ -5,16 +5,11 @@ const Idea = require('./models/Idea');
 const ProjectRepository = require('./models/ProjectRepository');
 const db = require('./utils/DbConnection');
 const uuidv4 = require('uuid/v4');
+const main_controller = require('./controllers/main_controller');
+const bodyParser = require('body-parser');
 
-/*
-let projet = new Projet("Test");
-let idea1 = new Idea("create an app to store project ideas");
-let idea2 = new Idea("Use nodejs, express and pugjs");
-projet.addIdea(idea1);
-projet.addIdea(idea2);
-*/
-db.sync({ force: true })
-    /*.then(() => {
+/*db.sync({ force: true })
+    .then(() => {
         return Projet.create({
             name: "Test project",
             uuid: uuidv4(),
@@ -33,11 +28,10 @@ db.sync({ force: true })
         }, {
                 include: [Idea]
             });
-    }).then((project) => {
-        console.log(project.get({ plain: true }));
     });*/
-
 app.set("view engine", "pug");
+app.use(bodyParser.json());
+//db.sync({force: true})
 
 app.get("/hello", (req, res) => {
     Projet.find({
@@ -51,14 +45,14 @@ app.get("/hello", (req, res) => {
     })
 });
 
-app.get("/project/:uuid", (req, res)=>{
+app.get("/project/:uuid", (req, res) => {
     console.log(req.params);
-    ProjectRepository.getSpecificProject(req.params.uuid, (project, error)=>{
-        if(error){
+    ProjectRepository.getSpecificProject(req.params.uuid, (project, error) => {
+        if (error) {
             console.log("callback called");
             res.status(404).send("Not found");
         } else {
-        res.render("project.pug", {title: project.name, project: project});
+            res.render("project.pug", { title: project.name, project: project });
         }
     });
 });
@@ -73,9 +67,9 @@ app.get("/", (req, res) => {
     });
 });
 
+app.use("/", main_controller());
+
 
 app.listen(5000, () => {
     console.log("Listening on port 5000");
 });
-
-console.log();
