@@ -7,9 +7,9 @@ module.exports = {
                 uuid: ideaUuid
             },
             attributes: ["content"]
-        }).then((idea)=>{
+        }).then((idea) => {
             callback(idea);
-        }).catch((error)=>{
+        }).catch((error) => {
             callback(null, error);
         })
     }

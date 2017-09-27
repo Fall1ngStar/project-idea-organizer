@@ -38,27 +38,27 @@ module.exports = {
 
     createProject: (project, callback) => {
         if (project.name == undefined) {
-            callback(null, {error: "A girl has no name, but a project can't"});
+            callback(null, { error: "A girl has no name, but a project can't" });
         } else {
             try {
-            Project.create({
-                name: project.name,
-                uuid: uuid(),
-                ideas: project.ideas == undefined ? [] : project.ideas.map(idea => {
-                    if(idea.content == undefined){
-                        throw {error: "An idea must have some content"};
-                    }
-                    return {
-                        content: idea.content,
-                        uuid: uuid()
-                    }
-                })
-            }, {
-                    include: [Idea]
-                }).then((result) => {
-                    callback(result);
-                });
-            } catch(error){
+                Project.create({
+                    name: project.name,
+                    uuid: uuid(),
+                    ideas: project.ideas == undefined ? [] : project.ideas.map(idea => {
+                        if (idea.content == undefined) {
+                            throw { error: "An idea must have some content" };
+                        }
+                        return {
+                            content: idea.content,
+                            uuid: uuid()
+                        }
+                    })
+                }, {
+                        include: [Idea]
+                    }).then((result) => {
+                        callback(result);
+                    });
+            } catch (error) {
                 callback(null, error);
             }
         }

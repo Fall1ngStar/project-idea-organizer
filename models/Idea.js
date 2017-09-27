@@ -10,5 +10,4 @@ const Project = db.define("idea", {
     }
 })
 
-
 module.exports = Project;

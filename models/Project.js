@@ -7,6 +7,6 @@ const Project = db.define("project", {
     name: Sequelize.STRING,
     uuid: Sequelize.UUID
 });
-Project.belongsToMany(Idea, {through: "project_ideas"});
+Project.belongsToMany(Idea, { through: "project_ideas" });
 
 module.exports = Project;
