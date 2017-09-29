@@ -1,12 +1,7 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const Projet = require('./models/Project');
-const Idea = require('./models/Idea');
-const ProjectRepository = require('./models/ProjectRepository');
-const db = require('./utils/DbConnection');
-const uuidv4 = require('uuid/v4');
-const main_controller = require('./controllers/main_controller');
-const bodyParser = require('body-parser');
+const main_controller = require("./controllers/main_controller");
+const bodyParser = require("body-parser");
 
 /*db.sync({ force: true })
     .then(() => {
@@ -29,44 +24,11 @@ const bodyParser = require('body-parser');
                 include: [Idea]
             });
     });*/
-app.set("view engine", "pug");
-app.use(bodyParser.json());
 //db.sync({force: true})
 
-app.get("/hello", (req, res) => {
-    Projet.find({
-        attributes: ["name", "uuid"],
-        include: [{
-            model: Idea,
-            attributes: ["content", "uuid"]
-        }]
-    }).then((project) => {
-        res.send(JSON.stringify(project));
-    })
-});
 
-app.get("/project/:uuid", (req, res) => {
-    console.log(req.params);
-    ProjectRepository.getSpecificProject(req.params.uuid, (project, error) => {
-        if (error) {
-            console.log("callback called");
-            res.status(404).send("Not found");
-        } else {
-            res.render("project.pug", { title: project.name, project: project });
-        }
-    });
-});
-
-app.get("/", (req, res) => {
-    ProjectRepository.getProjectList((projects) => {
-        res.render("index.pug", {
-            title: "Hello pug",
-            message: "Hello there",
-            projects: projects
-        });
-    });
-});
-
+app.set("view engine", "pug");
+app.use(bodyParser.json());
 app.use("/", main_controller());
 
 

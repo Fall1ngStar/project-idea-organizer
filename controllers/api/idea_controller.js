@@ -14,6 +14,6 @@ module.exports = () => {
     });
     router.get("/", (req, res) => {
         res.status(501).send("Method not defined");
-    })
+    });
     return router;
-}
+};

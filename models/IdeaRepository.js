@@ -1,4 +1,4 @@
-const Idea = require('../models/Idea')
+const Idea = require('../models/Idea');
 
 module.exports = {
     getIdeaByUuid: (ideaUuid, callback) => {
@@ -13,4 +13,4 @@ module.exports = {
             callback(null, error);
         })
     }
-}
+};

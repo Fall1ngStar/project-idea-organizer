@@ -25,7 +25,7 @@ module.exports = {
                 attributes: ["content"]
             }]
         }).then((project) => {
-            if (project == undefined) {
+            if (project === undefined) {
                 callback(null, { error: "Not found" });
             } else {
                 callback(project);
@@ -37,15 +37,15 @@ module.exports = {
     },
 
     createProject: (project, callback) => {
-        if (project.name == undefined) {
+        if (project.name === undefined) {
             callback(null, { error: "A girl has no name, but a project can't" });
         } else {
             try {
                 Project.create({
                     name: project.name,
                     uuid: uuid(),
-                    ideas: project.ideas == undefined ? [] : project.ideas.map(idea => {
-                        if (idea.content == undefined) {
+                    ideas: project.ideas === undefined ? [] : project.ideas.map(idea => {
+                        if (idea.content === undefined) {
                             throw { error: "An idea must have some content" };
                         }
                         return {
@@ -63,4 +63,4 @@ module.exports = {
             }
         }
     }
-}
+};
