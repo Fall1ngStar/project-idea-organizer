@@ -30,6 +30,6 @@ app.use(bodyParser.json());
 app.use("/", main_controller());
 
 
-app.listen(5000, () => {
+app.listen(80, () => {
     console.log("Listening on port 5000");
 });
