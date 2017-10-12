@@ -24,8 +24,6 @@ const bodyParser = require("body-parser");
                 include: [Idea]
             });
     });*/
-//db.sync({force: true})
-
 
 app.set("view engine", "pug");
 app.use(bodyParser.json());
